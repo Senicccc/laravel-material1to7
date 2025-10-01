@@ -1,0 +1,142 @@
+README.md – Tutor Laravel CRUD Karyawan
+1️⃣ Setup Project Laravel
+
+Buat project Laravel baru:
+
+composer create-project laravel/laravel karyawan
+
+
+Masuk ke folder project:
+
+cd karyawan
+
+
+Buka di VS Code (opsional):
+
+code .
+
+
+Jalankan server lokal:
+
+php artisan serve
+
+
+Buka browser ke http://127.0.0.1:8000 untuk ngecek project berhasil jalan.
+
+2️⃣ Membuat Migration, Model, Controller, Seeder, dan Factory
+
+Migration: buat tabel karyawan
+
+php artisan make:migration create_karyawan_table
+
+
+Controller: buat KaryawanController
+
+php artisan make:controller KaryawanController
+
+
+Model: buat model Karyawan
+
+php artisan make:model Karyawan
+
+
+Seeder: buat KaryawanSeeder
+
+php artisan make:seed KaryawanSeeder
+
+
+Factory: buat KaryawanFactory dan hubungkan ke model
+
+php artisan make:factory --model=Karyawan
+
+
+Catatan:
+Factory dipakai di seeder untuk generate data dummy otomatis.
+
+3️⃣ Database Setup
+
+Buat database baru di MySQL, misal karyawandb.
+
+Sesuaikan .env:
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=karyawandb
+DB_USERNAME=root
+DB_PASSWORD=
+
+
+Jalankan migration:
+
+php artisan migrate
+
+
+Jalankan seeder:
+
+php artisan db:seed --class=KaryawanSeeder
+
+
+Tips: Kalau database belum ada, Laravel bisa nanya mau dibuat otomatis → pilih yes.
+
+4️⃣ Membuat Routes
+
+Buat resource route untuk CRUD:
+
+Route::resource('karyawan', KaryawanController::class);
+
+
+Ini otomatis bikin route untuk: index, create, store, edit, update, destroy.
+
+Pastikan link di blade sesuai nama resource route, contoh: route('karyawan.index').
+
+5️⃣ Membuat Blade Views
+
+Buat view sederhana:
+
+home.blade.php → daftar karyawan + tombol tambah/edit/hapus
+
+create-karyawan.blade.php → form tambah karyawan
+
+edit-karyawan.blade.php → form edit karyawan
+
+Simpan di folder resources/views.
+
+Bisa langsung pakai HTML sederhana tanpa layout.
+
+6️⃣ Keterangan CRUD di Controller
+
+index → tampilkan semua data karyawan.
+
+create → tampilkan form tambah.
+
+store → simpan data baru ke database.
+
+edit → ambil data tertentu untuk diedit.
+
+update → simpan perubahan data.
+
+destroy → hapus data.
+
+Tips: Gunakan $fillable di model supaya mass assignment aman.
+Validasi form di controller penting untuk keamanan data.
+
+7️⃣ Terminal Summary
+
+Setup project Laravel → composer create-project
+
+Jalankan server → php artisan serve
+
+Migration → php artisan make:migration
+
+Controller → php artisan make:controller
+
+Model → php artisan make:model
+
+Seeder → php artisan make:seed
+
+Factory → php artisan make:factory --model=Karyawan
+
+Migrasi database → php artisan migrate
+
+Isi data → php artisan db:seed --class=KaryawanSeeder# laravel-material1to7
